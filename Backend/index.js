@@ -1,84 +1,23 @@
-// import express from 'express';
-// import cors from 'cors';
-// import mongoose from 'mongoose';
-// const app = express();
-// app.use(cors());
-// app.use(express.json())
-
-//  mongoose.connect("mongodb://127.0.0.1:27017/mydatabase")
-
-//  const usershema = new mongoose.Schema({
-//   name: String,
-//   email:String,
-//   phone:Number
-//  })
-
-//  const usermodel = mongoose.model("students",usershema)
-
-//   //  Get students...
-//  app.get("/getstudents",(req,res)=>{
-//       usermodel.find({})
-//       .then(students => res.json(students))
-//       .catch(err => console.log(err))
-//  })
-
-// //  Create student...
-//  app.post("/student",(req,res)=>{
-//   usermodel.create(req.body)
-//   .then(students => res.json(students))
-//   .catch(err=>console.log(err))
-//  })
-
-//    // Delete student...
-//  app.delete("/delete/:id",(req,res)=>{
-//   const id = req.params.id;
-//   usermodel.findByIdAndDelete({_id:id})
-//   .then(res => res.json(res))
-//   .catch(err => console.log(err))
-// })
-
-//   // Read student..
-
-//   app.get("/Read/:id",(req,res)=>{
-//     const id = req.params.id;
-//     usermodel.findById(id)
-//     .then(students => res.json(students))
-//     .catch(err => console.log(err))
-// })
-
-// // Update student..
-// app.put('/update/:id', (req, res) => {
-//   const id = req.params.id;
-//   const updatedData = req.body; // Assuming you send the updated data in the request body
-
-//   usermodel.findByIdAndUpdate(id, updatedData)
-//     .then((student) => res.json(student))
-//     .catch((err) => console.log(err));
-// });
-
-
-// app.listen(9004,()=>{
-//   console.log('server is listening...9004')
-// })
-
 
 
 
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydatabase", {
+mongoose.connect(process.env.DB_NAME, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
 .then(() => {
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB...');
 })
 .catch(err => {
   console.error('Failed to connect to MongoDB', err);
